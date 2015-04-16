@@ -1,0 +1,120 @@
+<!doctype html>
+<!--
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE
+The complete set of authors may be found at http://polymer.github.io/AUTHORS
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
+-->
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://cdn.rawgit.com/webcomponents/webcomponentsjs/master/webcomponents-lite.js"></script>
+  <link rel="import" href="dependencies.dev.html">
+
+</head>
+<body>
+
+  <prism-highlighter></prism-highlighter>
+
+  <a is="sg-header">Polymer &lt;style-guide&gt;</a>
+
+  <section>
+    <a is="sg-header">Documentation</a>
+
+    <section>
+      <a is="sg-header">Element Summaries</a>
+      <marked-element><script type="text/markdown">
+        <p class="tldr">Provide a thorough overview of what the element does, and provide examples of common usage patterns. Format the documentation as markdown.</p>
+
+        If the element declares a `<dom-module>`, write the documentation via HTML comments preceeding that `<dom-module>`:
+
+            <!--
+            `<awesome-sauce>` injects a healthy dose of awesome into your page.
+
+            In typical use, just slap some `<awesome-sauce>` at the top of your body:
+
+                <body>
+                  <awesome-sauce></awesome-sauce>
+
+            Wham! It's all awesome now!
+            -->
+            <dom-module id="awesome-sauce">
+
+        If your element lacks a `<dom-module>`, write documentation via a JSDoc comment attached to its `Polymer()` call:
+
+            /**
+             * `<awesome-sauce>` injects a healthy dose of awesome into your page.
+             *
+             * In typical use, just slap some `<awesome-sauce>` at the top of your body:
+             *
+             *     <body>
+             *       <awesome-sauce></awesome-sauce>
+             *
+             * Wham! It's all awesome now!
+             */
+            Polymer({
+              is: 'awesome-sauce',
+
+      </script></marked-element>
+    </section>
+
+    <section>
+      <a is="sg-header">Properties</a>
+      <marked-element><script type="text/markdown">
+        <p class="tldr">Document all public properties. Docs should start with a one line summary. Make sure that the property's type is annotated.</p>
+
+        For example, the most simple property documentation can be a single line:
+
+            /** Whether this element is currently awesome. */
+            isAwesome: Boolean,
+
+        If the property doesn't specifiy a type, or that type is not primitive, be sure to [annotate](#type-annotation) the type properly:
+
+            /**
+             * Metadata describing what has been made awesome on the page.
+             *
+             * @type {{elements: Array<HTMLElement>, level: number}}
+             */
+            sauce: Object,
+
+      </script></marked-element>
+    </section>
+
+    <section>
+      <a is="sg-header">Methods</a>
+      <marked-element><script type="text/markdown">
+        <p class="tldr">Follow the [property guidelines](#properties). Additionally, make sure the types for all params and return values are documented.</p>
+
+        For example:
+
+            /**
+             * Applies awesomeness to `element`.
+             *
+             * @param {HTMLElement} element The element to be made awesome.
+             * @param {number} level The numeric level of awesomeness. A value
+             *     between `1` and `11`.
+             * @param {Array<HTMLElements>=} refs Optional referenced elements
+             *     that become awesome by proxy.
+             * @return {number} The cumulative level of awesomeness.
+             */
+            makeAwesome: function makeAwesome(element, level, refs) {
+
+      </script></marked-element>
+    </section>
+
+    <section>
+      <a is="sg-header">Type Annotation</a>
+      <marked-element><script type="text/markdown">
+        <p class="tldr">Adhere to [Closure-compatible type expressions](https://developers.google.com/closure/compiler/docs/js-for-compiler#types).</p>
+      </script></marked-element>
+    </section>
+
+  </section>
+
+</body>
+</html>

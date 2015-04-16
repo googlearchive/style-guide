@@ -1,0 +1,116 @@
+<!--
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE
+The complete set of authors may be found at http://polymer.github.io/AUTHORS
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
+-->
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-styles/classes/typography.html">
+
+<style>
+/*
+Ideally we'd be mixing styles in and using var(), but we're blocked until:
+https://github.com/Polymer/polymer/issues/1415
+*/
+
+a[is=sg-header] {
+  /* color: var(--google-blue-500) */
+  color: #4285f4;
+  display: block;
+  margin-top: 20px;
+  text-decoration: none;
+  /* Bash over the text transform given to us by the global paper-styles. */
+  text-transform: inherit;
+}
+
+a[is=sg-header] {
+  /* mixin(--paper-style-display2); */
+  font-size: 45px;
+  letter-spacing: -.018em;
+  line-height: 48px;
+}
+
+section a[is=sg-header] {
+  /* mixin(--paper-style-display1); */
+  font-size: 34px;
+  letter-spacing: -.01em;
+  line-height: 40px;
+}
+
+section section a[is=sg-header] {
+  /* mixin(--paper-style-headline); */
+  font-size: 24px;
+  letter-spacing: -.012em;
+  line-height: 32px;
+}
+
+</style>
+
+<script>
+(function() {
+
+  /** @type {Object<number>} The slugs currently in use */
+  var _activeSlugs = {};
+
+  /**
+   * Generates a unique slug based on `text`.
+   *
+   * If a slug has been previously generated for similar text, the generated
+   * slug may also be given additional values to deduplicate.
+   *
+   * @param {string} text The messy text to slugify.
+   * @return {string} The pristine slug.
+   */
+  function toSlug(text) {
+    var slug = text.trim().toLowerCase();
+    slug = slug.replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+
+    if (slug in _activeSlugs) {
+      _activeSlugs[slug] = _activeSlugs[slug] + 1;
+      slug = slug + ':' + _activeSlugs[slug];
+    } else {
+      _activeSlugs[slug] = 1;
+    }
+
+    return slug;
+  }
+
+  /**
+   * A fancy schmancy anchor tag that auto linkifies itself.
+   *
+   *     <a is="sg-header">Stuff To say!</a>
+   *
+   */
+  Polymer({
+
+    is: 'sg-header',
+
+    extends: 'a',
+
+    hostAttributes: {
+      // We override most of this above, but it gives us kerning & fonts.
+      'class': 'paper-font-display2',
+    },
+
+    ready: function() {
+      var slug = toSlug(this.textContent);
+      var hash = '#' + slug;
+      this.setAttribute('id', slug);
+      // https://github.com/Polymer/polymer/issues/1417
+      this.async(function() {
+        this.setAttribute('href', hash);
+      });
+
+      // We can't rely on browser behavior here, since we're injecting these ids
+      // after the fact.
+      if (window.location.hash === hash) {
+        this.scrollIntoViewIfNeeded();
+      }
+    },
+
+  });
+
+})();
+</script>
