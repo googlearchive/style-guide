@@ -64,8 +64,7 @@ section section a[is=sg-header] {
    * @return {string} The pristine slug.
    */
   function toSlug(text) {
-    var slug = text.trim().toLowerCase();
-    slug = slug.replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+    var slug = text.toLowerCase().replace(/[^\w\s]+/g, '').trim().replace(/\s+/g, '-');
 
     if (slug in _activeSlugs) {
       _activeSlugs[slug] = _activeSlugs[slug] + 1;
