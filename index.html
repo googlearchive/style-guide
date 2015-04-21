@@ -29,9 +29,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <section>
       <a is="sg-header">Element Summaries</a>
       <marked-element><script type="text/markdown">
-        <p class="tldr">Provide a thorough overview of what the element does, and provide examples of common usage patterns. Format the documentation as markdown.</p>
+        <p class="tldr">
+          Provide a thorough overview of what the element does, and provide
+          examples of common usage patterns. Format the documentation as
+          markdown.
+        </p>
 
-        If the element declares a `<dom-module>`, write the documentation via HTML comments preceeding that `<dom-module>`:
+        If the element declares a `<dom-module>`, write the documentation via
+        HTML comments preceeding that `<dom-module>`:
 
             <!--
             `<awesome-sauce>` injects a healthy dose of awesome into your page.
@@ -45,7 +50,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             -->
             <dom-module id="awesome-sauce">
 
-        If your element lacks a `<dom-module>`, write documentation via a JSDoc comment attached to its `Polymer()` call:
+        If your element lacks a `<dom-module>`, write documentation via a JSDoc
+        comment attached to its `Polymer()` call:
 
             /**
              * `<awesome-sauce>` injects a healthy dose of awesome into your page.
@@ -66,14 +72,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <section>
       <a is="sg-header">Properties</a>
       <marked-element><script type="text/markdown">
-        <p class="tldr">Document all public properties. Docs should start with a one line summary. Make sure that the property's type is annotated.</p>
+        <p class="tldr">
+          Document all public properties. Docs should start with a one line
+          summary. Make sure that the property's type is annotated.
+        </p>
 
-        For example, the most simple property documentation can be a single line:
+        For example, the most simple property documentation can be a single
+        line:
 
             /** Whether this element is currently awesome. */
             isAwesome: Boolean,
 
-        If the property doesn't specifiy a type, or that type is not primitive, be sure to [annotate](#type-annotation) the type properly:
+        If the property doesn't specifiy a type, or that type is not primitive,
+        be sure to [annotate](#type-annotation) the type properly:
 
             /**
              * Metadata describing what has been made awesome on the page.
@@ -88,7 +99,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <section>
       <a is="sg-header">Methods</a>
       <marked-element><script type="text/markdown">
-        <p class="tldr">Follow the [property guidelines](#properties). Additionally, make sure the types for all params and return values are documented.</p>
+        <p class="tldr">
+          Follow the [property guidelines](#properties). Additionally, make sure
+          the types for all params and return values are documented.
+        </p>
 
         For example:
 
@@ -117,42 +131,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <section>
       <a is="sg-header">Language</a>
       <marked-element><script type="text/markdown">
-        <p class="tldr">When in doubt, keep to the 3rd person present tense and keep it simple.</p>
+        <p class="tldr">
+          When in doubt, keep to the 3rd person present tense and keep it
+          simple.
+        </p>
 
         A few guidelines for consistency:
 
-        *   Use the 3rd person for descriptions. 
-          
-            - Good. "Creates a foo."
-            - Avoid. "Create a foo."
+        * Use the 3rd person for descriptions.
 
-            Use 2nd person ("Do this...") when you're _trying_ to be prescriptive,
-            such as, "**Add** the `toolbar` attribute to the element you want
-            to use as a toolbar."
+          * Good. "Creates a foo."
+          * Avoid. "Create a foo."
 
-        *   Use the present tense whenever possible.
+          Use 2nd person ("Do this...") when you're _trying_ to be prescriptive,
+          such as, "**Add** the `toolbar` attribute to the element you want
+          to use as a toolbar."
 
-            - Good. "Clicking the element starts an animation."
-            - Avoid. "Clicking the element will start an animation."
+        * Use the present tense whenever possible.
 
-        *   Start method descriptions with an active verb. 
+          * Good. "Clicking the element starts an animation."
+          * Avoid. "Clicking the element will start an animation."
 
-            - Good. "Starts the animation."
-            - Avoid. "This method to starts the animation."
+        * Start method descriptions with an active verb.
 
-        *   It's OK to use a fragment, especially in a short description.
+          * Good. "Starts the animation."
+          * Avoid. "This method to starts the animation."
 
-            - Good. "Item height, in pixels."
-            - Avoid. "This property specifies the item height, in pixels."
+        * It's OK to use a fragment, especially in a short description.
 
-            (Fragments should still start with a capital letter and 
-            have ending punctuation.)
+          * Good. "Item height, in pixels."
+          * Avoid. "This property specifies the item height, in pixels."
 
-        The [JavaDoc Style Guide](http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html#styleguide) 
+          (Fragments should still start with a capital letter and
+          have ending punctuation.)
+
+        The [JavaDoc Style Guide](http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html#styleguide)
         is a good resource on general API doc style. Most of the style rules
         described there can be applied here as well.
-
-
       </script></marked-element>
     </section>
 

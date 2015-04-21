@@ -10,9 +10,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <style>
 
+marked-element > #content,
+marked-element::shadow #content {
+  padding: 16px;
+}
+
+ul, ol {
+  padding-left: 16px;
+}
+
 p, pre {
-  padding: 8px;
-  margin: 8px 16px;
+  margin: 16px 0;
 }
 
 pre, .tldr {
@@ -26,7 +34,7 @@ pre, .tldr {
   /* background-color: var(--paper-blue-50); */
   background-color: #e1f5fe;
   padding: 16px;
-  margin: 8px;
+  margin: 0 -8px;
   position: relative;
 }
 .tldr:before {

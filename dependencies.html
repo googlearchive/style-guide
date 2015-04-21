@@ -9159,9 +9159,17 @@ a {
 </style>
 <style>
 
+marked-element > #content,
+marked-element::shadow #content {
+  padding: 16px;
+}
+
+ul, ol {
+  padding-left: 16px;
+}
+
 p, pre {
-  padding: 8px;
-  margin: 8px 16px;
+  margin: 16px 0;
 }
 
 pre, .tldr {
@@ -9175,7 +9183,7 @@ pre, .tldr {
   /* background-color: var(--paper-blue-50); */
   background-color: #e1f5fe;
   padding: 16px;
-  margin: 8px;
+  margin: 0 -8px;
   position: relative;
 }
 .tldr:before {
@@ -9244,8 +9252,7 @@ section section a[is=sg-header] {
    * @return {string} The pristine slug.
    */
   function toSlug(text) {
-    var slug = text.trim().toLowerCase();
-    slug = slug.replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+    var slug = text.toLowerCase().replace(/[^\w\s]+/g, '').trim().replace(/\s+/g, '-');
 
     if (slug in _activeSlugs) {
       _activeSlugs[slug] = _activeSlugs[slug] + 1;
@@ -9293,6 +9300,33 @@ section section a[is=sg-header] {
   });
 
 })();
+</script>
+<script>
+
+  /**
+   * A fancy schmancy anchor tag that auto linkifies itself.
+   *
+   *     <a is="sg-header">Stuff To say!</a>
+   *
+   */
+  Polymer({
+
+    is: 'sg-advice',
+
+    // wtf span!? Shouldn't it be `section`, or some other block level element?
+    //
+    // Well, ideally, yes. But we want the contents to be fully processed into
+    // paragraphs by markdown. It doesn't do that for block level elements.
+    extends: 'span',
+
+    // host
+
+    created: function() {
+      console.log(this.outerHTML);
+    },
+
+  });
+
 </script>
 </head><body><div hidden="" by-vulcanize=""><dom-module id="marked-element" assetpath="bower_components/paper-styles/classes/classes/bower_components/prism-highlighter/bower_components/marked-element/">
 
