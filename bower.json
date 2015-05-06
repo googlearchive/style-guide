@@ -1,13 +1,13 @@
 {
   "name": "style-guide",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "authors": [
     "The Polymer Authors"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#v0.8.0-rc.4",
-    "paper-styles": "PolymerElements/paper-styles#~0.8.4",
-    "marked-element": "PolymerElements/marked-element#~0.8.1",
-    "prism-highlighter": "PolymerElements/prism-highlighter#~0.8.1"
+    "polymer": "Polymer/polymer#v0.9.0-rc.1",
+    "paper-styles": "PolymerElements/paper-styles#^0.9.0",
+    "marked-element": "PolymerElements/marked-element#^0.9.0",
+    "prism-highlighter": "PolymerElements/prism-highlighter#^0.9.0"
   }
 }

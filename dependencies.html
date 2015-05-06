@@ -14,7 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // TODO(sorvell): Decide if this should be auto-use when available.
       // TODO(sorvell): if SD is auto-use, then the flag above should be something
       // like: Polymer = {dom: 'shady'}
-      
+
       // via Polymer object
       var user = window.Polymer || {};
 
@@ -49,14 +49,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 </script><script>
 
-  // until ES6 modules become standard, we follow Occam and simply stake out 
+  // until ES6 modules become standard, we follow Occam and simply stake out
   // a global namespace
 
-  // Polymer is a Function, but of course this is also an Object, so we 
+  // Polymer is a Function, but of course this is also an Object, so we
   // hang various other objects off of Polymer.*
   (function() {
     var userPolymer = window.Polymer;
-    
+
     window.Polymer = function(prototype) {
       var ctor = desugar(prototype);
       // native Custom Elements treats 'undefined' extends property
@@ -93,7 +93,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Raw usage
   [ctor =] Polymer.Class(prototype);
   document.registerElement(name, ctor);
-  
+
   // Simplified usage
   [ctor = ] Polymer(prototype);
   */
@@ -325,18 +325,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <script>
 
   /**
-   * Automatically extend using objects referenced in `mixins` array. 
-   * 
+   * Automatically extend using objects referenced in `mixins` array.
+   *
    *     Polymer({
-   *     
+   *
    *       mixins: [
    *         someMixinObject
    *       ]
-   *     
+   *
    *       ...
-   *     
+   *
    *     });
-   * 
+   *
    * @class base feature: mixins
    */
 
@@ -366,24 +366,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    *       extends: 'input',
    *       ...
    *     });
-   * 
+   *
    * Type-extension objects are created using `is` notation in HTML, or via
    * the secondary argument to `document.createElement` (the type-extension
-   * rules are part of the Custom Elements specification, not something 
-   * created by Polymer). 
-   * 
+   * rules are part of the Custom Elements specification, not something
+   * created by Polymer).
+   *
    * Example:
-   * 
+   *
    *     <!-- right: creates a pro-input element -->
    *     <input is="pro-input">
-   *   
+   *
    *     <!-- wrong: creates an unknown element -->
-   *     <pro-input>  
-   * 
+   *     <pro-input>
+   *
    *     <script>
    *        // right: creates a pro-input element
    *        var elt = document.createElement('input', 'pro-input');
-   * 
+   *
    *        // wrong: creates an unknown element
    *        var elt = document.createElement('pro-input');
    *     <\script>
@@ -427,19 +427,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   /**
    * Generates a boilerplate constructor.
-   * 
+   *
    *     XFoo = Polymer({
    *       is: 'x-foo'
    *     });
    *     ASSERT(new XFoo() instanceof XFoo);
-   *  
-   * You can supply a custom constructor on the prototype. But remember that 
+   *
+   * You can supply a custom constructor on the prototype. But remember that
    * this constructor will only run if invoked **manually**. Elements created
    * via `document.createElement` or from HTML _will not invoke this method_.
-   * 
-   * Instead, we reuse the concept of `constructor` for a factory method which 
-   * can take arguments. 
-   * 
+   *
+   * Instead, we reuse the concept of `constructor` for a factory method which
+   * can take arguments.
+   *
    *     MyFoo = Polymer({
    *       is: 'my-foo',
    *       constructor: function(foo) {
@@ -447,7 +447,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    *       }
    *       ...
    *     });
-   * 
+   *
    * @class base feature: constructor
    */
 
@@ -463,16 +463,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // support both possible `createElement` signatures
       this._factoryArgs = this.extends ? [this.extends, this.is] : [this.is];
       // thunk the constructor to delegate allocation to `createElement`
-      var ctor = function() { 
-        return this._factory(arguments); 
+      var ctor = function() {
+        return this._factory(arguments);
       };
       if (this.hasOwnProperty('extends')) {
-        ctor.extends = this.extends; 
+        ctor.extends = this.extends;
       }
       // ensure constructor is set. The `constructor` property is
       // not writable on Safari; note: Chrome requires the property
       // to be configurable.
-      Object.defineProperty(this, 'constructor', {value: ctor, 
+      Object.defineProperty(this, 'constructor', {value: ctor,
         writable: true, configurable: true});
       ctor.prototype = this;
     },
@@ -497,9 +497,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    *       <property>: <Type || Object>,
    *       ...
    *     }
-   * 
+   *
    * Example:
-   * 
+   *
    *     properties: {
    *       // `foo` property can be assigned via attribute, will be deserialized to
    *       // the specified data-type. All `properties` properties have this behavior.
@@ -520,7 +520,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * information. Other features use this information to control behavior.
    *
    * The `type` information is used by the `attributes` feature to convert
-   * String values in attributes to typed properties. The `bind` feature uses 
+   * String values in attributes to typed properties. The `bind` feature uses
    * property information to control property access.
    *
    * Marking a property as `notify` causes a change in the property to
@@ -536,7 +536,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   // null object
   Polymer.nob = Object.create(null);
-  
+
   Polymer.Base.addFeature({
 
     properties: {
@@ -590,9 +590,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       if (dash.indexOf('-') < 0) {
         return Polymer.CaseMap._caseMap[dash] = dash;
       }
-      return Polymer.CaseMap._caseMap[dash] = dash.replace(/-([a-z])/g, 
+      return Polymer.CaseMap._caseMap[dash] = dash.replace(/-([a-z])/g,
         function(m) {
-          return m[1].toUpperCase(); 
+          return m[1].toUpperCase();
         }
       );
     },
@@ -602,9 +602,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       if (mapped) {
         return mapped;
       }
-      return Polymer.CaseMap._caseMap[camel] = camel.replace(/([a-z][A-Z])/g, 
-        function (g) { 
-          return g[0] + '-' + g[1].toLowerCase() 
+      return Polymer.CaseMap._caseMap[camel] = camel.replace(/([a-z][A-Z])/g,
+        function (g) {
+          return g[0] + '-' + g[1].toLowerCase()
         }
       );
     }
@@ -803,21 +803,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   /**
    * Automatic template management.
-   * 
+   *
    * The `template` feature locates and instances a `<template>` element
    * corresponding to the current Polymer prototype.
-   * 
-   * The `<template>` element may be immediately preceeding the script that 
+   *
+   * The `<template>` element may be immediately preceeding the script that
    * invokes `Polymer()`.
-   *  
+   *
    * @class standard feature: template
    */
-  
+
   Polymer.Base.addFeature({
 
     _prepTemplate: function() {
       // locate template using dom-module
-      this._template = 
+      this._template =
         this._template || Polymer.DomModule.import(this.is, 'template');
       // fallback to look at the node previous to the currentScript.
       if (!this._template) {
@@ -838,7 +838,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     instanceTemplate: function(template) {
-      var dom = 
+      var dom =
         document.importNode(template._content || template.content, true);
       return dom;
     }
@@ -858,7 +858,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * host has had a chance to set a property value on the child. The `ready`
    * method solves this problem since it's called host to child.
    *
-   * Dom distribution: To support reprojection efficiently, it's important to 
+   * Dom distribution: To support reprojection efficiently, it's important to
    * distribute from host to child in one shot. The `attachedCallback` mostly
    * goes in the desired order except for elements that are in dom to start; in
    * this case, all children are attached before the host element. Ready also
@@ -909,15 +909,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // 2. an element hosts the elements on which it configures data.
     // Practially, these notions are almost always coincident.
     // Some special elements like templates may separate them.
-    // In order not to over-emphaisize this technical difference, we expose 
+    // In order not to over-emphaisize this technical difference, we expose
     // one concept to the user and it maps to the dom-related meaning of host.
     //
     // 1. set this element's `host` and push this element onto the `host`'s
     // list of `client` elements
-    // 2. establish this element as the current hosting element (allows 
+    // 2. establish this element as the current hosting element (allows
     // any elements we stamp to easily set host to us).
     _pushHost: function(host) {
-      this.host = host = host || 
+      this.host = host = host ||
         Polymer.Base.hostStack[Polymer.Base.hostStack.length-1];
       if (host && host._clients) {
         host._clients.push(this);
@@ -1019,7 +1019,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <script>
 
 Polymer.ArraySplice = (function() {
-  
+
   function newSplice(index, removed, addedCount) {
     return {
       index: index,
@@ -1281,7 +1281,7 @@ Polymer.ArraySplice = (function() {
     if (Settings.useShadow) {
 
       EventApi.prototype = {
-        
+
         get rootTarget() {
           return this.event.path[0];
         },
@@ -1299,7 +1299,7 @@ Polymer.ArraySplice = (function() {
     } else {
 
       EventApi.prototype = {
-      
+
         get rootTarget() {
           return this.event.target;
         },
@@ -1427,7 +1427,7 @@ Polymer.ArraySplice = (function() {
       // cases in which we may not be able to just do standard appendChild
       // 1. container has a shadyRoot (needsDistribution IFF the shadyRoot
       // has an insertion point)
-      // 2. container is a shadyRoot (don't distribute, instead set 
+      // 2. container is a shadyRoot (don't distribute, instead set
       // container to container.host.
       // 3. node is <content> (host of container needs distribution)
       appendChild: function(node) {
@@ -1476,7 +1476,7 @@ Polymer.ArraySplice = (function() {
         }
         if (!distributed) {
           // if ref_node is <content> replace with first distributed node
-          ref_node = ref_node.localName === CONTENT ? 
+          ref_node = ref_node.localName === CONTENT ?
             this._firstComposedNode(ref_node) : ref_node;
           // if adding to a shadyRoot, add to host instead
           var container = this.node._isShadyRoot ? this.node.host : this.node;
@@ -1527,7 +1527,7 @@ Polymer.ArraySplice = (function() {
           } else {
             var parent = Polymer.dom(node).parentNode;
             if (parent) {
-              root = parent._isShadyRoot ? parent : 
+              root = parent._isShadyRoot ? parent :
                 this._ownerShadyRootForNode(parent);
             } else {
              root = null;
@@ -1536,7 +1536,7 @@ Polymer.ArraySplice = (function() {
           node._ownerShadyRoot = root;
         }
         return node._ownerShadyRoot;
-        
+
       },
 
       _maybeDistribute: function(node, parent, host) {
@@ -1555,7 +1555,7 @@ Polymer.ArraySplice = (function() {
       _updateInsertionPoints: function(host) {
         host.shadyRoot._insertionPoints =
           factory(host.shadyRoot).querySelectorAll(CONTENT);
-      }, 
+      },
 
       _nodeIsInLogicalTree: function(node) {
         return Boolean(node._isShadyRoot ||
@@ -1564,7 +1564,7 @@ Polymer.ArraySplice = (function() {
       },
 
       _hostForNode: function(node) {
-        var root = node.shadyRoot || (node._isShadyRoot ? 
+        var root = node.shadyRoot || (node._isShadyRoot ?
           node : this._getOwnerShadyRoot(node));
         return root && root.host;
       },
@@ -1573,12 +1573,12 @@ Polymer.ArraySplice = (function() {
         return parent.shadyRoot && hasInsertionPoint(parent.shadyRoot);
       },
 
-      // TODO(sorvell): technically we should check non-fragment nodes for 
+      // TODO(sorvell): technically we should check non-fragment nodes for
       // <content> children but since this case is assumed to be exceedingly
       // rare, we avoid the cost and will address with some specific api
       // when the need arises.
       _nodeNeedsDistribution: function(node) {
-        return (node.localName === CONTENT) || 
+        return (node.localName === CONTENT) ||
           ((node.nodeType === Node.DOCUMENT_FRAGMENT_NODE) &&
             node.querySelector(CONTENT));
       },
@@ -1611,7 +1611,7 @@ Polymer.ArraySplice = (function() {
 
       // NOTE: in general, we expect contents of the lists here to be small-ish
       // and therefore indexOf to be nbd. Other optimizations can be made
-      // for larger lists (linked list) 
+      // for larger lists (linked list)
       _removeLogicalInfo: function(node, container) {
         var children = factory(container).childNodes;
         var index = children.indexOf(node);
@@ -1634,7 +1634,7 @@ Polymer.ArraySplice = (function() {
         }
       },
 
-      // TODO(sorvell): This will fail if distribution that affects this 
+      // TODO(sorvell): This will fail if distribution that affects this
       // question is pending; this is expected to be exceedingly rare, but if
       // the issue comes up, we can force a flush in this case.
       _firstComposedNode: function(content) {
@@ -1656,7 +1656,7 @@ Polymer.ArraySplice = (function() {
       querySelectorAll: function(selector) {
         return this._query(function(n) {
           return matchesSelector.call(n, selector);
-        }, this.node);  
+        }, this.node);
       },
 
       _query: function(matcher, node) {
@@ -1691,7 +1691,7 @@ Polymer.ArraySplice = (function() {
       },
 
       /*
-        Returns a list of nodes distributed within this element. These can be 
+        Returns a list of nodes distributed within this element. These can be
         dom children or elements distributed to children that are insertion
         points.
       */
@@ -1711,7 +1711,7 @@ Polymer.ArraySplice = (function() {
       _distributedFilter: function(selector, list, results) {
         results = results || [];
         for (var i=0, l=list.length, d; (i<l) && (d=list[i]); i++) {
-          if ((d.nodeType === Node.ELEMENT_NODE) && 
+          if ((d.nodeType === Node.ELEMENT_NODE) &&
             (d.localName !== CONTENT) &&
             matchesSelector.call(d, selector)) {
             results.push(d);
@@ -1719,8 +1719,8 @@ Polymer.ArraySplice = (function() {
         }
         return results;
       }
-            
-    }; 
+
+    };
 
     if (Settings.useShadow) {
 
@@ -1771,7 +1771,7 @@ Polymer.ArraySplice = (function() {
     function saveLightChildrenIfNeeded(node) {
       // Capture the list of light children. It's important to do this before we
       // start transforming the DOM into "rendered" state.
-      // 
+      //
       // Children may be added to this list dynamically. It will be treated as the
       // source of truth for the light children of the element. This element's
       // actual children will be treated as the rendered state once lightChildren
@@ -1857,10 +1857,10 @@ Polymer.ArraySplice = (function() {
 
       /**
        * Force this element to distribute its children to its local dom.
-       * A user should call `distributeContent` if distribution has been 
-       * invalidated due to changes to selectors on child elements that 
+       * A user should call `distributeContent` if distribution has been
+       * invalidated due to changes to selectors on child elements that
        * effect distribution. For example, if an element contains an
-       * insertion point with <content select=".foo"> and a `foo` class is 
+       * insertion point with <content select=".foo"> and a `foo` class is
        * added to a child, then `distributeContent` must be called to update
        * local dom distribution.
        */
@@ -2161,7 +2161,7 @@ Polymer.ArraySplice = (function() {
 
 </script>
 <script>
-  
+
   /**
     Implements `shadyRoot` compatible dom scoping using native ShadowDOM.
   */
@@ -2178,7 +2178,7 @@ Polymer.ArraySplice = (function() {
       distributeContent: function() {},
       _distributeContent: function() {},
       _finishDistribute: function() {},
-      
+
       // create a shadowRoot
       _createLocalRoot: function() {
         this.createShadowRoot();
@@ -2269,7 +2269,7 @@ Polymer.ArraySplice = (function() {
 <script>
 /**
  * Scans a template to produce an annotation list that that associates
- * metadata culled from markup with tree locations 
+ * metadata culled from markup with tree locations
  * metadata and information to associate the metadata with nodes in an instance.
  *
  * Supported expressions include:
@@ -2291,7 +2291,7 @@ Polymer.ArraySplice = (function() {
  * associated with these expressions, it only captures the data.
  *
  * Generated data-structure:
- * 
+ *
  *     [
  *       {
  *         id: '<id>',
@@ -2315,7 +2315,7 @@ Polymer.ArraySplice = (function() {
  *       },
  *       ...
  *     ]
- * 
+ *
  * @class Template feature
  */
 
@@ -2331,7 +2331,7 @@ Polymer.ArraySplice = (function() {
     //
     parseAnnotations: function(template) {
       var list = [];
-      var content = template._content || template.content; 
+      var content = template._content || template.content;
       this._parseNodeAnnotations(content, list);
       return list;
     },
@@ -2377,7 +2377,7 @@ Polymer.ArraySplice = (function() {
         this._parseNodeAttributeAnnotations(element, annote, list);
         // TODO(sorvell): ad hoc callback for doing work on elements while
         // leveraging annotator's tree walk.
-        // Consider adding an node callback registry and moving specific 
+        // Consider adding an node callback registry and moving specific
         // processing out of this module.
         if (this.prepElement) {
           this.prepElement(element);
@@ -2390,7 +2390,7 @@ Polymer.ArraySplice = (function() {
     },
 
     // add annotations gleaned from children of `root` to `list`, `root`'s
-    // `annote` is supplied as it is the annote.parent of added annotations 
+    // `annote` is supplied as it is the annote.parent of added annotations
     _parseChildNodesAnnotations: function(root, annote, list, callback) {
       if (root.firstChild) {
         for (var i=0, node=root.firstChild; node; node=node.nextSibling, i++){
@@ -2400,7 +2400,7 @@ Polymer.ArraySplice = (function() {
             var content = document.createDocumentFragment();
             content.appendChild(node.content);
             // TODO(sjmiles): using `nar` to avoid unnecessary allocation;
-            // in general the handling of these arrays needs some cleanup 
+            // in general the handling of these arrays needs some cleanup
             // in this module
             list.push({
               bindings: Polymer.nar,
@@ -2421,7 +2421,7 @@ Polymer.ArraySplice = (function() {
     },
 
     // add annotation data from attributes to the `annotation` for node `node`
-    // TODO(sjmiles): the distinction between an `annotation` and 
+    // TODO(sjmiles): the distinction between an `annotation` and
     // `annotation data` is not as clear as it could be
     // Walk attributes backwards, since removeAttribute can be vetoed by
     // IE in certain cases (e.g. <input value="foo">), resulting in the
@@ -2478,8 +2478,8 @@ Polymer.ArraySplice = (function() {
         }
         // Remove annotation
         node.removeAttribute(n);
-        // Case hackery: attributes are lower-case, but bind targets 
-        // (properties) are case sensitive. Gambit is to map dash-case to 
+        // Case hackery: attributes are lower-case, but bind targets
+        // (properties) are case sensitive. Gambit is to map dash-case to
         // camel-case: `foo-bar` becomes `fooBar`.
         // Attribute bindings are excepted.
         if (kind === 'property') {
@@ -2505,10 +2505,10 @@ Polymer.ArraySplice = (function() {
 
     findAnnotatedNode: function(root, annote) {
       // recursively ascend tree until we hit root
-      var parent = annote.parent && 
+      var parent = annote.parent &&
         Polymer.Annotations.findAnnotatedNode(root, annote.parent);
       // unwind the stack, returning the indexed node at each level
-      return !parent ? root : 
+      return !parent ? root :
         Polymer.Annotations._localSubTree(parent, root)[annote.index];
     }
 
@@ -2520,17 +2520,17 @@ Polymer.ArraySplice = (function() {
 
   (function() {
 
-    // path fixup for urls in cssText that's expected to 
+    // path fixup for urls in cssText that's expected to
     // come from a given ownerDocument
     function resolveCss(cssText, ownerDocument) {
       return cssText.replace(CSS_URL_RX, function(m, pre, url, post) {
-        return pre + '\'' + 
-          resolve(url.replace(/["']/g, ''), ownerDocument) + 
+        return pre + '\'' +
+          resolve(url.replace(/["']/g, ''), ownerDocument) +
           '\'' + post;
       });
     }
 
-    // url fixup for urls in an element's attributes made relative to 
+    // url fixup for urls in an element's attributes made relative to
     // ownerDoc's base url
     function resolveAttrs(element, ownerDocument) {
       for (var name in URL_ATTRS) {
@@ -2568,7 +2568,7 @@ Polymer.ArraySplice = (function() {
     }
 
     function getUrlResolver(ownerDocument) {
-      return ownerDocument.__urlResolver || 
+      return ownerDocument.__urlResolver ||
         (ownerDocument.__urlResolver = ownerDocument.createElement('a'));
     }
 
@@ -2591,15 +2591,15 @@ Polymer.ArraySplice = (function() {
 </script><script>
 
 /**
- * Scans a template to produce an annotation object that stores expression 
- * metadata along with information to associate the metadata with nodes in an 
+ * Scans a template to produce an annotation object that stores expression
+ * metadata along with information to associate the metadata with nodes in an
  * instance.
  *
- * Elements with `id` in the template are noted and marshaled into an 
- * the `$` hash in an instance. 
- * 
+ * Elements with `id` in the template are noted and marshaled into an
+ * the `$` hash in an instance.
+ *
  * Example
- * 
+ *
  *     &lt;template>
  *       &lt;div id="foo">&lt;/div>
  *     &lt;/template>
@@ -2610,7 +2610,7 @@ Polymer.ArraySplice = (function() {
  *        }
  *      });
  *     &lt;/script>
- * 
+ *
  * Other expressions that are noted include:
  *
  * Double-mustache annotations in text content. The annotation must be the only
@@ -2631,8 +2631,8 @@ Polymer.ArraySplice = (function() {
  *     <[tag] on-<event-name>="{{hostMethodName}}"><[tag]>
  *
  * Note: **the `annotations` feature does not actually implement the behaviors
- * associated with these expressions, it only captures the data**. 
- * 
+ * associated with these expressions, it only captures the data**.
+ *
  * Other optional features contain actual data implementations.
  *
  * @class standard feature: annotations
@@ -2726,8 +2726,8 @@ TODO(sjmiles): this module should produce either syntactic metadata
       this._configureTemplateContent();
     },
 
-    // nested template contents have been stored prototypically to avoid 
-    // unnecessary duplication, here we put references to the 
+    // nested template contents have been stored prototypically to avoid
+    // unnecessary duplication, here we put references to the
     // indirected contents onto the nested template instances
     _configureTemplateContent: function() {
       this._annotes.forEach(function(note) {
@@ -3165,7 +3165,7 @@ TODO(sjmiles): this module should produce either syntactic metadata
 <script>
 
 Polymer.Async = (function() {
-  
+
   var currVal = 0;
   var lastVal = 0;
   var callbacks = [];
@@ -3210,37 +3210,37 @@ Polymer.Async = (function() {
   new (window.MutationObserver || JsMutationObserver)(atEndOfMicrotask)
     .observe(twiddle, {characterData: true})
     ;
-  
-  // exports 
+
+  // exports
 
   return {
     run: runAsync,
     cancel: cancelAsync
   };
-  
+
 })();
 
 </script>
 <script>
 
 Polymer.Debounce = (function() {
-  
+
   // usage
-  
+
   // invoke cb.call(this) in 100ms, unless the job is re-registered,
   // which resets the timer
-  // 
+  //
   // this.job = this.debounce(this.job, cb, 100)
   //
   // returns a handle which can be used to re-register a job
 
   var Async = Polymer.Async;
-  
+
   var Debouncer = function(context) {
     this.context = context;
     this.boundComplete = this.complete.bind(this);
   };
-  
+
   Debouncer.prototype = {
     go: function(callback, wait) {
       var h;
@@ -3273,11 +3273,11 @@ Polymer.Debounce = (function() {
     debouncer.go(callback, wait);
     return debouncer;
   }
-  
-  // exports 
+
+  // exports
 
   return debounce;
-  
+
 })();
 
 </script>
@@ -3891,7 +3891,7 @@ Polymer.Debounce = (function() {
 
     _applyEffectValue: function(value, info) {
       var node = this._nodes[info.index];
-      // TODO(sorvell): ideally, the info object is normalized for easy 
+      // TODO(sorvell): ideally, the info object is normalized for easy
       // lookup here.
       var property = info.property || info.name || 'textContent';
       // TODO(sorvell): consider pre-processing this step so we don't need
@@ -3916,11 +3916,11 @@ Polymer.Debounce = (function() {
 
   /*
     Process inputs efficiently via a configure lifecycle callback.
-    Configure is called top-down, host before local dom. Users should 
-    implement configure to supply a set of default values for the element by 
+    Configure is called top-down, host before local dom. Users should
+    implement configure to supply a set of default values for the element by
     returning an object containing the properties and values to set.
 
-    Configured values are not immediately set, instead they are set when 
+    Configured values are not immediately set, instead they are set when
     an element becomes ready, after its local dom is ready. This ensures
     that any user change handlers are not called before ready time.
 
@@ -3932,7 +3932,7 @@ Polymer.Debounce = (function() {
   Configured values are collected into _config. At ready time, properties
   are set to the values in _config. This ensures properties are set child
   before host and change handlers are called only at ready time. The host
-  will reset a value already propagated to a child, but this is not 
+  will reset a value already propagated to a child, but this is not
   inefficient because of dirty checking at the set point.
 
   Bind notification events are sent when properties are set at ready time
@@ -3940,7 +3940,7 @@ Polymer.Debounce = (function() {
   in property updates and this triggers side effects, handling notifications
   is deferred until ready time.
 
-  In general, events can be heard before an element is ready. This may occur 
+  In general, events can be heard before an element is ready. This may occur
   when a user sends an event in a change handler or listens to a data event
   directly (on-foo-changed).
   */
@@ -3980,10 +3980,10 @@ Polymer.Debounce = (function() {
           }
         }
       }
-      // get add'l default values from central configure 
-      this.simpleMixin(config, this.configure(this._config));
+      // get add'l default values from central configure
+      this.simple@apply(config, this.configure(this._config));
       // combine defaults returned from configure with inputs in _config
-      this.simpleMixin(config, this._config);
+      this.simple@apply(config, this._config);
       // this is the new _config, which are the final values to be applied
       this._config = config;
       // pass configuration data to bindings
@@ -4024,8 +4024,8 @@ Polymer.Debounce = (function() {
       this._flushHandlers();
     },
 
-    // NOTE: values are already propagated to children via 
-    // _distributeConfig so propagation triggered by effects here is 
+    // NOTE: values are already propagated to children via
+    // _distributeConfig so propagation triggered by effects here is
     // redundant, but safe due to dirty checking
     _applyConfig: function(config) {
       for (var n in config) {
@@ -4364,7 +4364,7 @@ Polymer.Debounce = (function() {
           n = {start: i+1, parent: p, previous: previous};
           p.rules.push(n);
           break;
-        case CLOSE_BRACE: 
+        case CLOSE_BRACE:
           //console.groupEnd(n.start);
           n.end = i+1;
           n = n.parent || root;
@@ -4390,9 +4390,9 @@ Polymer.Debounce = (function() {
     if (r$) {
       for (var i=0, l=r$.length, r; (i<l) && (r=r$[i]); i++) {
         parseCss(r, text);
-      }  
+      }
     }
-    return node;  
+    return node;
   }
 
   // stringify parsed css.
@@ -4405,7 +4405,7 @@ Polymer.Debounce = (function() {
       if (r$ && !hasMixinRules(r$)) {
         for (var i=0, l=r$.length, r; (i<l) && (r=r$[i]); i++) {
           cssText = stringify(r, cssText);
-        }  
+        }
       } else {
         cssText = removeCustomProps(node.cssText).trim();
         if (cssText) {
@@ -4451,7 +4451,7 @@ Polymer.Debounce = (function() {
     mixinApply: /@mixin[\s]*\([^)]*?\)[\s]*;/gim
   };
 
-  // exports 
+  // exports
   Polymer.CssParse = {
     parse: parse,
     stringify: stringify
@@ -4466,7 +4466,7 @@ Polymer.Debounce = (function() {
     function toCssText(rules, callback) {
       if (typeof rules === 'string') {
         rules = Polymer.CssParse.parse(rules);
-      } 
+      }
       if (callback) {
         forEachStyleRule(rules, callback);
       }
@@ -4480,7 +4480,7 @@ Polymer.Debounce = (function() {
         if ((s.indexOf(AT_RULE) !== 0) && (s.indexOf(MIXIN_SELECTOR) !== 0)) {
           cb(node);
         }
-        skipRules = (s.indexOf(KEYFRAME_RULE) >= 0) || 
+        skipRules = (s.indexOf(KEYFRAME_RULE) >= 0) ||
           (s.indexOf(MIXIN_SELECTOR) >= 0);
       }
       var r$ = node.rules;
@@ -4529,7 +4529,7 @@ Polymer.Debounce = (function() {
 
     /* Transforms ShadowDOM styling into ShadyDOM styling
 
-     * scoping: 
+     * scoping:
 
         * elements in scope get scoping selector class="x-foo-scope"
         * selectors re-written as follows:
@@ -4550,8 +4550,8 @@ Polymer.Debounce = (function() {
 
     */
 
-    // Given a node and scope name, add a scoping class to each node 
-    // in the tree. This facilitates transforming css into scoped rules. 
+    // Given a node and scope name, add a scoping class to each node
+    // in the tree. This facilitates transforming css into scoped rules.
     function transformDom(node, scope) {
       _transformDom(node, scope ? scope + SCOPE_SUFFIX : '');
     }
@@ -4614,7 +4614,7 @@ Polymer.Debounce = (function() {
             stop = true;
           }
           c = o.combinator;
-          s = o.value;  
+          s = o.value;
         }
         return c + s;
       });
@@ -4671,7 +4671,7 @@ Polymer.Debounce = (function() {
     var COMPLEX_SELECTOR_SEP = ',';
     var SIMPLE_SELECTOR_SEP = /(^|[\s>+~]+)([^\s>+~]+)/g;
     var HOST = ':host';
-    // NOTE: this supports 1 nested () pair for things like 
+    // NOTE: this supports 1 nested () pair for things like
     // :host(:not([selected]), more general support requires
     // parsing which seems like overkill
     var HOST_PAREN = /(\:host)(?:\(((?:\([^)(]*\)|[^)(]*)+?)\))/g;
@@ -4711,7 +4711,7 @@ Polymer.Debounce = (function() {
         prepTemplate.call(this);
         var port = Polymer.DomModule.import(this.is);
         if (this._encapsulateStyle === undefined) {
-          this._encapsulateStyle = 
+          this._encapsulateStyle =
             Boolean(port && !Polymer.Settings.useNativeShadow);
         }
         // scope css
@@ -4745,7 +4745,7 @@ Polymer.Debounce = (function() {
         var styles = [];
         if (cssText) {
           var s = document.createElement('style');
-          s.textContent = cssText;  
+          s.textContent = cssText;
           styles.push(s);
         }
         return styles;
@@ -4772,7 +4772,7 @@ Polymer.Debounce = (function() {
         var cssText = '';
         for (var i=0, l=styles.length, s; (i<l) && (s = styles[i]); i++) {
           if (s && s.textContent) {
-            cssText += 
+            cssText +=
               Polymer.ResolveUrl.resolveCss(s.textContent, s.ownerDocument);
           }
         }
@@ -4796,7 +4796,7 @@ Polymer.Debounce = (function() {
           } else {
             var rules = this._rulesForStyle(s);
             Polymer.StyleUtil.applyCss(
-              Polymer.StyleTransformer.css(rules, this.is, this.extends), 
+              Polymer.StyleTransformer.css(rules, this.is, this.extends),
               this.is, null, true);
           }
         }
@@ -4841,8 +4841,8 @@ Polymer.Debounce = (function() {
 <script>
 
   (function() {
-    
-    var defaultSheet = document.createElement('style'); 
+
+    var defaultSheet = document.createElement('style');
 
     function applyCss(cssText) {
       defaultSheet.textContent += cssText;
@@ -4862,7 +4862,7 @@ Polymer.Debounce = (function() {
 </script>
 <script>
   (function() {
-    
+
     var baseAttachedCallback = Polymer.Base.attachedCallback;
 
     // TODO(sorvell): consider if calculating properties and applying
@@ -4885,8 +4885,8 @@ Polymer.Debounce = (function() {
 
       _computeStyleProperties: function() {
         var props = {};
-        this.simpleMixin(props, this._computeStylePropertiesFromHost());        
-        this.simpleMixin(props, this._computeOwnStyleProperties());
+        this.simple@apply(props, this._computeStylePropertiesFromHost());
+        this.simple@apply(props, this._computeOwnStyleProperties());
         this._reifyCustomProperties(props);
         return props;
       },
@@ -4902,15 +4902,15 @@ Polymer.Debounce = (function() {
           props = Object.create(this.host._styleProperties);
           styles = this.host._styles;
         }
-        this.simpleMixin(props,
+        this.simple@apply(props,
           this._customPropertiesFromStyles(styles, this.host));
         return props;
-        
+
       },
 
       _computeOwnStyleProperties: function() {
         var props = {};
-        this.simpleMixin(props, this._customPropertiesFromStyles(this._styles));
+        this.simple@apply(props, this._customPropertiesFromStyles(this._styles));
         if (this.styleProperties) {
           for (var i in this.styleProperties) {
             props[i] = this.styleProperties[i];
@@ -4930,7 +4930,7 @@ Polymer.Debounce = (function() {
         return props;
       },
 
-      // test if a rule matches the given node and if so, 
+      // test if a rule matches the given node and if so,
       // collect any custom properties
       // TODO(sorvell): support custom variable assignment within mixins
       _customPropertiesFromRule: function(props, hostNode, rule) {
@@ -4953,7 +4953,7 @@ Polymer.Debounce = (function() {
           properties[m[1]] = m[2].trim();
         }
       },
-   
+
       _reifyCustomProperties: function(props) {
         for (var i in props) {
           props[i] = this._valueForCustomProperty(props[i], props);
@@ -4962,7 +4962,7 @@ Polymer.Debounce = (function() {
 
       _valueForCustomProperty: function(property, props) {
         var cv;
-        while ((typeof property === 'string') && 
+        while ((typeof property === 'string') &&
           (cv = property.match(CUSTOM_VAR_VALUE))) {
           property = props[cv[1]];
         }
@@ -4978,7 +4978,7 @@ Polymer.Debounce = (function() {
           if (!style) {
             var cssText = this._generateCustomStyleCss(bag, s$);
             style = cssText ? this._applyCustomCss(cssText) : {};
-            cacheStyle(this.is, style, this._scopeSelector, 
+            cacheStyle(this.is, style, this._scopeSelector,
               this._styleProperties, s$);
           } else if (Polymer.Settings.useNativeShadow) {
             this._applyCustomCss(style.textContent);
@@ -4992,17 +4992,17 @@ Polymer.Debounce = (function() {
       _generateCustomStyleCss: function(properties, styles) {
         var b = this._applyPropertiesToRule.bind(this, properties);
         var cssText = '';
-        // TODO(sorvell): don't redo parsing work each time as below; 
+        // TODO(sorvell): don't redo parsing work each time as below;
         // instead create a sheet with just custom properties
         for (var i=0, l=styles.length, s; (i<l) && (s=styles[i]); i++) {
-          cssText += this._transformCss(s.textContent, b) + '\n\n'; 
+          cssText += this._transformCss(s.textContent, b) + '\n\n';
         }
         return cssText.trim();
       },
 
       _transformCss: function(cssText, callback) {
         return Polymer.Settings.useNativeShadow ?
-          Polymer.StyleUtil.toCssText(cssText, callback) : 
+          Polymer.StyleUtil.toCssText(cssText, callback) :
           Polymer.StyleTransformer.css(cssText, this.is, this.extends, callback);
       },
 
@@ -5019,7 +5019,7 @@ Polymer.Debounce = (function() {
         if (this._customStyle) {
           this._customStyle.textContent = cssText;
         } else if (cssText) {
-          this._customStyle = Polymer.StyleUtil.applyCss(cssText, 
+          this._customStyle = Polymer.StyleUtil.applyCss(cssText,
             this._scopeSelector,
             Polymer.Settings.useNativeShadow ? this.root : null);
         }
@@ -5048,7 +5048,7 @@ Polymer.Debounce = (function() {
             output += '\t' + m[1].trim() + ': ' + this._propertyToCss(v);
           }
         }
-        // e.g. @mixin(--stuff);
+        // e.g. @@apply(--stuff);
         while (m = CUSTOM_MIXIN_USE.exec(cssText)) {
           v = m[1];
           if (v) {
@@ -5086,9 +5086,9 @@ Polymer.Debounce = (function() {
 
       updateStyles: function() {
         this._updateOwnStyles();
-        // TODO(sorvell): temporary way to find local dom that needs 
+        // TODO(sorvell): temporary way to find local dom that needs
         // x-scope styling.
-        var c$ = Polymer.dom(this.root).querySelectorAll('[x-style-scope]');
+        var c$ = Polymer.dom(this.root).querySelectorAll('[custom-style-scope]');
         for (var i=0, l= c$.length, c; (i<l) && (c=c$[i]); i++) {
           if (c.updateStyles) {
             c.updateStyles();
@@ -5097,7 +5097,7 @@ Polymer.Debounce = (function() {
       }
 
     });
-    
+
     var styleCache = {};
     function cacheStyle(is, style, scope, bag, styles) {
       style._scope = scope;
@@ -5112,8 +5112,8 @@ Polymer.Debounce = (function() {
       if (styles) {
         for (var i=0, s; i < styles.length; i++) {
           s = styles[i];
-          if (objectsEqual(bag, s._properties) && 
-            objectsEqual(checkStyles,  s._styles)) { 
+          if (objectsEqual(bag, s._properties) &&
+            objectsEqual(checkStyles,  s._styles)) {
             return s;
           }
         }
@@ -5134,7 +5134,7 @@ Polymer.Debounce = (function() {
       return true;
     }
 
-    var XSCOPE_ATTR = 'x-style-scope';
+    var XSCOPE_ATTR = 'custom-style-scope';
     var SCOPE_PREFIX = '[' + XSCOPE_ATTR + '=';
     var SCOPE_SUFFIX = ']';
     var HOST_SELECTOR_SEP = '($|[\\.\\:\\[\\s>\\+~])';
@@ -5179,18 +5179,18 @@ Polymer.Debounce = (function() {
 
 </script>
 
-<!-- 
+<!--
 
-The `x-style` extension of the native `<style>` element allows defining styles
+The `custom-style` extension of the native `<style>` element allows defining styles
 in the main document that can take advantage of several special features of
 Polymer's styling system:
 
-* Document styles defined in an `x-style` will be shimmed to ensure they do
+* Document styles defined in an `custom-style` will be shimmed to ensure they do
 not leak into local DOM when running on browsers without non-native Shadow DOM.
 * Shadow DOM-specific `/deep/` and `::shadow` combinators will be shimmed on
 browsers without non-native Shadow DOM.
 * Custom properties used by Polymer's experimental shim for cross-scope styling
-may be defined in an `x-style`.
+may be defined in an `custom-style`.
 
 Example:
 
@@ -5201,23 +5201,23 @@ Example:
   <script src="components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="components/polymer/polymer.html">
 
-  <style is="x-style">
-    
+  <style is="custom-style">
+
     /* Will be prevented from affecting local DOM of Polymer elements */
     * {
       box-sizing: border-box;
     }
-    
+
     /* Can use /deep/ and ::shadow combinators */
     body /deep/ .my-special-view::shadow #thing-inside {
       background: yellow;
     }
-    
+
     /* Custom properties that inherit down the document tree may be defined */
     body {
       --my-toolbar-title-color: green;
     }
-    
+
   </style>
 
 </head>
@@ -5229,7 +5229,7 @@ Example:
 </html>
 ```
 
-Note, all features of `x-style` are available when defining styles as part of Polymer elements (e.g. `<style>` elements within `<dom-module>`'s used for defining Polymer elements. The `x-style` extension should only be used for defining document styles, outside of a custom element's local DOM.
+Note, all features of `custom-style` are available when defining styles as part of Polymer elements (e.g. `<style>` elements within `<dom-module>`'s used for defining Polymer elements. The `custom-style` extension should only be used for defining document styles, outside of a custom element's local DOM.
 
 -->
 
@@ -5238,7 +5238,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
 
   Polymer({
 
-    is: 'x-style',
+    is: 'custom-style',
     extends: 'style',
 
     created: function() {
@@ -5247,7 +5247,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
       // TODO(sorvell): since custom rules must match directly, they tend to be
       // made with selectors like `*`.
       // We *remove them here* so they don't apply too widely and nerf recalc.
-      // This means that normal properties mixe in rules with custom 
+      // This means that normal properties mixe in rules with custom
       // properties will *not* apply.
       var cssText = Polymer.StyleUtil.parser.stringify(rules);
       this.textContent = this.scopeCssText(cssText);
@@ -5327,7 +5327,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
         return;
       }
       // `archetype` is the prototype of the anonymous
-      // class created by the templatizer 
+      // class created by the templatizer
       var archetype = Object.create(Polymer.Base);
       archetype.host = this;
       archetype.contentHost = this._getContentHost();
@@ -5337,7 +5337,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
       // setup accessors
       archetype._prepEffects();
       // late-binds archetype.listen to host.listen; h.l doesn't exist yet
-      archetype.listen = function() { 
+      archetype.listen = function() {
         this.listen.apply(this, arguments);
       }.bind(this.host);
 
@@ -5368,14 +5368,14 @@ Note, all features of `x-style` are available when defining styles as part of Po
         if (c) {
           var contentHost = archetype.contentHost;
           if (contentHost) {
-            Polymer.Annotations.prepElement = 
+            Polymer.Annotations.prepElement =
               contentHost._prepElement.bind(contentHost);
           }
           archetype._annotes = c._annotes ||
             Polymer.Annotations.parseAnnotations(template);
           c._annotes = archetype._annotes;
           Polymer.Annotations.prepElement = null;
-        } 
+        }
         else {
           console.warn('no _content');
         }
@@ -5409,7 +5409,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
       return new this.ctor(model);
     }
 
-    // TODO(sorvell): note, using the template as host is ~5-10% faster if 
+    // TODO(sorvell): note, using the template as host is ~5-10% faster if
     // elements have no default values.
     // _constructorImpl: function(model, host) {
     //   this._setupConfigure(model);
@@ -5426,7 +5426,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
     // stamp: function(model) {
     //   return new this.ctor(model, this.host);
     // }
-    
+
 
   };
 
@@ -5435,11 +5435,11 @@ Note, all features of `x-style` are available when defining styles as part of Po
   /**
    * Creates a pseudo-custom-element that maps property values to bindings
    * in DOM.
-   * 
+   *
    * `stamp` method creates an instance of the pseudo-element. The instance
    * references a document-fragment containing the stamped and bound dom
-   * via it's `root` property. 
-   *  
+   * via it's `root` property.
+   *
    */
   Polymer({
 
@@ -5462,7 +5462,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
 (function() {
 
   var callbacks = new WeakMap();
-  
+
   function observe(array, cb) {
     if (Array.observe) {
       var ncb = function(changes) {
@@ -5560,7 +5560,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
     observe: observe,
     unobserve: unobserve
   };
-  
+
 })();
 
 </script>
@@ -5599,10 +5599,10 @@ Note, all features of `x-style` are available when defining styles as part of Po
               break;
             case 'number':
               v = s[i] = u[i]= new Number(v);
-              break;          
+              break;
             case 'boolean':
               v = s[i] = u[i]= new Boolean(v);
-              break;          
+              break;
           }
         map.set(v, i);
         }
@@ -5669,7 +5669,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
       if (item != null && this.map) {
         return this.map.get(item);
       } else {
-        return this.store.indexOf(item);      
+        return this.store.indexOf(item);
       }
     },
 
@@ -5725,7 +5725,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
   };
 
   Polymer.Collection.get = function(userArray, noObserve) {
-    return Polymer._collections.get(userArray) 
+    return Polymer._collections.get(userArray)
       || new Polymer.Collection(userArray, noObserve);
   };
 
@@ -5813,25 +5813,25 @@ Note, all features of `x-style` are available when defining styles as part of Po
         this.templatize(this);
       }
       if (this._renderPendingAttach) {
-        this._renderPendingAttach = false; 
+        this._renderPendingAttach = false;
         this.render();
       }
     },
 
     _sortChanged: function() {
-      this._sortFn = this.sort && (typeof this.sort == 'function' ? 
+      this._sortFn = this.sort && (typeof this.sort == 'function' ?
         this.sort : this.host[this.sort].bind(this.host));
       this.debounce('render', this.render);
     },
 
     _filterChanged: function() {
-      this._filterFn = this.filter && (typeof this.filter == 'function' ? 
+      this._filterFn = this.filter && (typeof this.filter == 'function' ?
         this.filter : this.host[this.filter].bind(this.host));
       this.debounce('render', this.render);
     },
 
     _observeChanged: function() {
-      this._observePaths = this.observe && 
+      this._observePaths = this.observe &&
         this.observe.replace('.*', '.').split(' ');
     },
 
@@ -5847,7 +5847,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
           this._observeCollection(items);
           this.debounce('render', this.render);
         }
-      }          
+      }
     },
 
     _checkObservedPaths: function(path) {
@@ -5984,7 +5984,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
         var start = 0;
         for (i=0; i<addedKeys.length; i++) {
           start = this._insertRowIntoViewSort(start, addedKeys[i], pool);
-        }          
+        }
       }
     },
 
@@ -6036,7 +6036,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
           addedKeys = addedKeys.filter(function(a) {
             return this._filterFn(c.getItem(a));
           }, this);
-          filterDelta += (s.added.length - addedKeys.length);            
+          filterDelta += (s.added.length - addedKeys.length);
         }
         var idx = s.index - filterDelta;
         // Apply splices to keys
@@ -6154,7 +6154,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
 
   Polymer({
     is: 'x-array-selector',
-    
+
     properties: {
 
       /**
@@ -6188,7 +6188,7 @@ Note, all features of `x-style` are available when defining styles as part of Po
        */
       multi: Boolean
     },
-    
+
     _itemsChanged: function() {
       // Unbind previous selection
       if (Array.isArray(this.selected)) {
@@ -7655,19 +7655,19 @@ var _ = self.Prism = {
 		insertBefore: function (inside, before, insert, root) {
 			root = root || _.languages;
 			var grammar = root[inside];
-			
+
 			if (arguments.length == 2) {
 				insert = arguments[1];
-				
+
 				for (var newToken in insert) {
 					if (insert.hasOwnProperty(newToken)) {
 						grammar[newToken] = insert[newToken];
 					}
 				}
-				
+
 				return grammar;
 			}
-			
+
 			var ret = {};
 
 			for (var token in grammar) {
@@ -7687,7 +7687,7 @@ var _ = self.Prism = {
 					ret[token] = grammar[token];
 				}
 			}
-			
+
 			// Update references in other language definitions
 			_.languages.DFS(_.languages, function(key, value) {
 				if (value === root[inside] && key != inside) {
@@ -8083,7 +8083,7 @@ if (Prism.languages.markup) {
 			alias: 'language-css'
 		}
 	});
-	
+
 	Prism.languages.insertBefore('inside', 'attr-value', {
 		'style-attr': {
 			pattern: /\s*style=("|').*?\1/i,
@@ -9214,21 +9214,21 @@ a[is=sg-header] {
 }
 
 a[is=sg-header] {
-  /* mixin(--paper-style-display2); */
+  /* @apply(--paper-style-display2); */
   font-size: 45px;
   letter-spacing: -.018em;
   line-height: 48px;
 }
 
 section a[is=sg-header] {
-  /* mixin(--paper-style-display1); */
+  /* @apply(--paper-style-display1); */
   font-size: 34px;
   letter-spacing: -.01em;
   line-height: 40px;
 }
 
 section section a[is=sg-header] {
-  /* mixin(--paper-style-headline); */
+  /* @apply(--paper-style-headline); */
   font-size: 24px;
   letter-spacing: -.012em;
   line-height: 32px;
