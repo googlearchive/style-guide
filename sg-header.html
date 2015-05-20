@@ -105,7 +105,12 @@ section section a[is=sg-header] {
       // We can't rely on browser behavior here, since we're injecting these ids
       // after the fact.
       if (window.location.hash === hash) {
-        this.scrollIntoViewIfNeeded();
+        if (this.scrollIntoViewIfNeeded()) {
+          // scrollIntoViewIfNeeded only supported on webkit/blink
+          this.scrollIntoViewIfNeeded();
+        } else {
+          this.scrollIntoView();
+        }
       }
     },
 
