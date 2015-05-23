@@ -35,8 +35,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           markdown.
         </p>
 
-        If the element declares a `<dom-module>`, write the documentation via
-        HTML comments preceeding that `<dom-module>`:
+        If the element declares a `<dom-module>`, write the documentation as
+        HTML comments **immediately** preceeding that `<dom-module>`
+
+            <link rel="import" href="../polymer/polymer.html">
 
             <!--
             `<awesome-sauce>` injects a healthy dose of awesome into your page.
@@ -49,6 +51,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             Wham! It's all awesome now!
             -->
             <dom-module id="awesome-sauce">
+
+        Note that the doc comment should be **after** any dependencies.
 
         If your element lacks a `<dom-module>`, write documentation via a JSDoc
         comment attached to its `Polymer()` call:
@@ -65,6 +69,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              */
             Polymer({
               is: 'awesome-sauce',
+
+        Element-level can be added at the **end** of the element summary, as part of the same comment block. 
+        Two tags are supported currently:
+
+        *   `@hero`. Specifies a hero image.
+
+                @hero path/to/image
+
+        *   `@demo`. Specifies a demo, with optional path and description. If path and description are omitted,
+            the standard demo path (`./demo/`) is assumed.
+
+                @demo
+
+                @demo path/to/demo1  Super cool demo, with sharks!
+                @demo path/to/demo2  Even cooler demo. The sharks have lasers!
+
+        Other tags will be ignored. 
+                
+        **Note: Any tags placed _before_ the end of the comment block are interpreted as the end 
+        of the element summary.**
 
       </script></marked-element>
     </section>
@@ -122,6 +146,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @return {number} The cumulative level of awesomeness.
              */
             makeAwesome: function makeAwesome(element, level, refs) {
+
+      </script></marked-element>
+    </section>
+
+    <section>
+      <a is="sg-header">Events</a>
+      <marked-element><script type="text/markdown">
+        <p class="tldr">
+          Events must be annotated explicitly with an <code>@event</code> tag. 
+        </p>
+
+        Event properties are documented with the `@param` tag, just like method parameters.
+
+        For example:
+
+            /**
+             * Fired when `element` changes its awesomeness level.
+             *
+             * @event awesome-change
+             * @param {number} newAwesome New level of awesomeness.
+             */
+
+      </script></marked-element>
+    </section>
+
+
+    <section>
+      <a is="sg-header">Behaviors</a>
+      <marked-element><script type="text/markdown">
+        <p class="tldr">Like an element, but add <code>@polymerBehavior</code>.</p>
+
+        Include a behavior summary, just like an element summary, but ending with a
+        `@polymerBehavior` tag. The behavior name can be specified explicitly if the 
+        doc parser can't infer it correctly. 
+
+            @polymerBehavior MyOddBehavior
+
+        Document methods, properties, etc. just like an element.
+
+        For example: 
+
+            /**
+             * Behavior that highlights stuff. 
+             *
+             * @polymerBehavior
+             */
+
+             Polymer.HighlightStuff = { ... }
 
       </script></marked-element>
     </section>
