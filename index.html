@@ -78,15 +78,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 @hero path/to/image
 
         *   `@demo`. Specifies a demo, with optional path and description. If path and description are omitted,
-            the standard demo path is assumed.
+            the standard demo path (`./demo/`) is assumed.
 
                 @demo
 
                 @demo path/to/demo1  Super cool demo, with sharks!
                 @demo path/to/demo2  Even cooler demo. The sharks have lasers!
 
-        Other tags will be ignored. Tags placed _before_ the end of the comment block are interpreted as the end 
-        of the element summary.
+        Other tags will be ignored. 
+                
+        **Note: Any tags placed _before_ the end of the comment block are interpreted as the end 
+        of the element summary.**
 
       </script></marked-element>
     </section>
@@ -155,15 +157,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           Events must be annotated explicitly with an <code>@event</code> tag. 
         </p>
 
-        Format for documenting  event parameters is TBD.
+        Event properties are documented with the `@param` tag, just like method parameters.
+
         For example:
 
             /**
-             * Fired when `element` loses its awesomeness.
+             * Fired when `element` changes its awesomeness level.
              *
-             * @event awesome-lost
+             * @event awesome-change
+             * @param {number} newAwesome New level of awesomeness.
              */
-            makeAwesome: function makeAwesome(element, level, refs) {
 
       </script></marked-element>
     </section>
