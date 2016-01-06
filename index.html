@@ -193,8 +193,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              * @polymerBehavior
              */
 
-             Polymer.HighlightStuff = { ... }
+            MyBehaviors.HighlightStuff = { ... }
 
+        When extending a behavior, you place the _new_ functionality 
+        in an implementation object as described in [Extending behaviors](https://www.polymer-project.org/1.0/docs/devguide/behaviors.html#extending).
+
+        The implementation object **must** be named with the behavior name followed
+        by `Impl`, and it must be annotated with `@polymerBehavior` _followed by 
+        the real behavior name_:
+
+            /**
+             * Extended behavior. 
+             *
+             * @polymerBehavior SuperBehavior
+             */
+            MyBehaviors.SuperBehaviorImpl = { ... }
+
+        The actual behavior is simply an array of behaviors, ending with the implementation 
+        object. It must also be annotated with `@polymerBehavior`:
+
+            /**
+             * @polymerBehavior 
+             */
+            MyBehaviors.SuperBehavior = [MyBehaviors.BaseBehavior, MyBehaviors.SuperBehaviorImpl]
+
+        The documentation system merges these declarations into a single behavior 
+        (in this case, `MyBehaviors.SuperBehavior`).
       </script></marked-element>
     </section>
 
